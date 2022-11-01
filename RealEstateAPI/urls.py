@@ -18,5 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    include('admin_panel.urls')
+    path('api/', include('agenzia_immobiliare.urls')),
+    path('api/', include('annuncio.urls')),
+    path('api/', include('indirizzo.urls')),
 ]
