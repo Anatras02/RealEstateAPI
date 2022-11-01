@@ -43,3 +43,6 @@ class Indirizzo(models.Model):
 
     def __str__(self):
         return f"{self.via} {self.civico}"
+
+
+

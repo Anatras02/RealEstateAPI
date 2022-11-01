@@ -1,8 +1,13 @@
+import os
+
 from django.db import models
 
-from RealEstateAPI.functions import upload_to
 from agenzia_immobiliare.models import AgenziaImmobiliare
 from indirizzo.models import Indirizzo
+
+
+def upload_to(instance, filename):
+    return os.path.join("images/immobili", instance.id)
 
 
 class TipologiaImmobile(models.Model):
@@ -20,7 +25,7 @@ class ContrattoImmobile(models.Model):
 
 
 class FotoImmobile(models.Model):
-    foto = models.ImageField(upload_to=upload_to("images/annunci"))
+    foto = models.ImageField(upload_to=upload_to)
 
 
 class Annuncio(models.Model):
@@ -41,3 +46,6 @@ class Annuncio(models.Model):
     tipologie = models.ManyToManyField(TipologiaImmobile)
     contratto = models.ForeignKey(ContrattoImmobile, on_delete=models.CASCADE)
     foto = models.ManyToManyField(FotoImmobile)
+
+    def __str__(self):
+        return self.titolo
